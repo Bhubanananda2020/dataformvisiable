@@ -1,0 +1,201 @@
+<div class="content">
+    <div class="container">
+        <div class="row ">
+            <div class="col-12 d-flex justify-content-center">
+                <div class="card" style="width: 75rem;" id="shadow">
+                    <div class="card-body justify-content-center">
+                        <form [formGroup]="createuser" (ngSubmit)="onSubmit()">
+                            <div class='main '>
+                                <div class="input-group form-floating mb-2">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" class="form-control" aria-label="userName" aria-describedby="basic-addon1" formControlName="userName" name="userName" required>
+                                    <label style="margin-left: 2.2rem;" for="floatingInput2">UserName</label>
+                                </div>
+
+                                <ng-container *ngFor="let error of errorMessage.userName">
+                                    <div class="alert alert-danger" *ngIf="createuser.get('userName')?.hasError(error.type)
+                                && (createuser.get('userName')?.dirty || createuser.get('userName')?.touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+
+
+
+                                <div class="input-group form-floating mb-2">
+                                    <span class="input-group-text"><i class="fas fa-user-tie"></i></span>
+                                    <input type="date" class="form-control" (change)="getAge()" aria-label="uDob" aria-describedby="basic-addon1" formControlName="uDob" name="uDob" required>
+                                    <label style="margin-left: 2.2rem;" for="floatingInput">Date of Birth</label>
+
+                                    <span class="input-group-text"><i class="fas fa-exclamation"></i></span>
+                                    <select class="form-select" formControlName="uGender" aria-label="Floating label select example" required>
+                                        <option value="male">Male</option>
+                                        <option value="female">Female</option>
+                                        <option value="other">Other</option>
+                                      </select> <label for="floatingSelect" style="margin-left: 52%;">Gender</label>
+                                </div>
+
+                                <ng-container *ngFor="let error of errorMessage.uDob">
+                                    <div class="alert alert-danger" *ngIf="createuser.get('uDob')?.hasError(error.type)
+                                && (createuser.get('uDob')?.dirty || createuser.get('uDob')?.touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngFor="let error of errorMessage.uGender">
+                                    <div class="alert alert-danger" *ngIf="createuser.get('uGender')?.hasError(error.type)
+                              && (createuser.get('uGender')?.dirty || createuser.get('uGender')?.touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+
+
+                                <div class="input-group form-floating" *ngIf="getAge">
+                                    <p>Current Age : {{userAge | json}} Year</p>
+                                </div>
+
+
+                                <div class="input-group form-floating mb-2">
+                                    <span class="input-group-text"><i class="fas fa-user-tie"></i></span>
+                                    <input type="text" class="form-control" aria-label="uDesignation" aria-describedby="basic-addon1" formControlName="uDesignation" name="uDesignation" required>
+                                    <label style="margin-left: 2.2rem;" for="floatingInput">Designation</label>
+
+                                    <span class="input-group-text"><i class="fas fa-user-tie"></i></span>
+                                    <input type="text" class="form-control" aria-label="uCompanyName" aria-describedby="basic-addon1" formControlName="uCompanyName" name="uCompanyName" required>
+                                    <label style="margin-left: 53%;" for="floatingInput">Company Name</label>
+                                </div>
+
+                                <ng-container *ngFor="let error of errorMessage.uDesignation">
+                                    <div class="alert alert-danger" *ngIf="createuser.get('uDesignation')?.hasError(error.type)
+                                && (createuser.get('uDesignation')?.dirty || createuser.get('uDesignation')?.touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngFor="let error of errorMessage.uCompanyName">
+                                    <div class="alert alert-danger" *ngIf="createuser.get('uCompanyName')?.hasError(error.type)
+                              && (createuser.get('uCompanyName')?.dirty || createuser.get('uCompanyName')?.touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+
+
+                                <div class="input-group form-floating mb-2">
+                                    <span class="input-group-text"><i class="fas fa-envelope-open-text"></i></span>
+                                    <input type="email" class="form-control" aria-label="uEmail" aria-describedby="basic-addon1" formControlName="uEmail" name="uEmail" required>
+                                    <label style="margin-left: 2.2rem;" for="floatingInput">Email Id</label>
+
+                                    <span class="input-group-text"><i class="fas  fa-envelope-open-text"></i></span>
+                                    <input type="text" class="form-control" aria-label="uNumber" aria-describedby="basic-addon1" ui-number-mask="3" formControlName="uNumber" id="uNumber" name="uNumber" [textMask]="{mask: phoneMask}" required>
+                                    <label style="margin-left: 53%;" for="floatingInput">Phone Number</label>
+                                </div>
+
+
+                                <ng-container *ngFor="let error of errorMessage.uEmail">
+                                    <div class="alert alert-danger" *ngIf="createuser.get('uEmail')?.hasError(error.type)
+                                    && (createuser.get('uEmail')?.dirty || createuser.get('uEmail')?.touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+                                <ng-container *ngFor="let error of errorMessage.uNumber">
+                                    <div class="alert alert-danger" *ngIf="createuser.get('uNumber')?.hasError(error.type)
+                                  && (createuser.get('uNumber')?.dirty || createuser.get('uNumber')?.touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+
+
+
+
+
+                                <div class="form-floating mb-2">
+                                    <textarea class="form-control" id="floatingTextarea2" formControlName="uAddress" id="uAddress" name="uAddress" style="height: 70px" required></textarea>
+                                    <label for="floatingTextarea2">Address</label>
+                                </div>
+
+
+                                <ng-container *ngFor="let error of errorMessage.uAddress">
+                                    <div class="alert alert-danger" *ngIf="createuser.get('uAddress')?.hasError(error.type)
+                                && (createuser.get('uAddress')?.dirty || createuser.get('uAddress')?.touched)">
+                                        {{ error.message }}
+                                    </div>
+                                </ng-container>
+
+
+                                <div class="col-sm-11 text-center ">
+                                    <button class="btn btn-outline-primary float-left " type="submit" [disabled]="!createuser.valid" style="width: 45%">Add</button>
+                                    <button class="btn btn-outline-secondary float-right" type="reset" style="width: 45%">RESET</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="content mt-5">
+    <div class="container">
+        <div class="row ">
+            <div class="col-12 d-flex justify-content-center">
+                <div class="card" style="width: 75rem;" id="shadow">
+                    <div class="card-body justify-content-center">
+                        <div class="content">
+                            <div class="card mr-3 ml-3" id="shadow" style="width: 100%;">
+                                <div class="card-body" id="bd01">
+                                    <div class="table-responsive-md">
+                                        <table id="viewuser" class="display" style="width: 100%;">
+                                            <thead>
+                                                <tr class="text-uppercase text-center">
+                                                    <th>User Name</th>
+                                                    <th>Birth Date</th>
+                                                    <th>Gender</th>
+                                                    <th>Designation</th>
+                                                    <th>Company Name</th>
+                                                    <th>Email Id</th>
+                                                    <th>Phone</th>
+                                                    <th>Address</th>
+                                                    <th>Action</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr *ngFor="let user of allUser">
+                                                    <td scope="row">{{user.userName}}</td>
+                                                    <td scope="row">{{user.uDob}}</td>
+                                                    <td scope="row">{{user.uGender}}</td>
+                                                    <td scope="row">{{user.uDesignation}}</td>
+                                                    <td scope="row">{{user.uCompanyName}}</td>
+                                                    <td scope="row">{{user.uEmail}}</td>
+                                                    <td scope="row">{{user.uNumber}}</td>
+                                                    <td scope="row">{{user.uAddress}}</td>
+                                                    <td scope="row">
+                                                        <button class="btn btn-primary" (click)="selectUser(user)">Edit</button>
+                                                        <button class="btn btn-danger" (click)="deleteUser(user)">Delete</button>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div *ngIf="selectUser">
+    <p>{{selectedUser|json}}</p>
+</div>
